@@ -1,0 +1,54 @@
+ファイル保存時、自動的にcakeコマンドを実行するプラグインです。
+編集したファイルからディレクトリを遡ってCakefileが存在した時点でcakeコマンドを実行します。
+
+!デフォルトでは拡張子に関係なく、ファイル保存時にcakeコマンドが実行されます
+
+" コマンド
+:CoffeeCreate
+現在のディレクトリにCakefileを作成します。
+生成されるCakefileはCoffeeTemplateコマンドで編集可能です
+
+:CoffeeEdit
+coffee-cake.vimで使用されるCakefileを検索し、開きます
+Cakefileが存在しない場合、何もしません
+
+:CoffeeTemplate
+CoffeeCreateで生成されるCakefileのテンプレートを編集します
+
+:CoffeePause
+cakeコマンドの自動実行を一時的に停止します。
+Vimを再起動した場合、一時停止は解除されます。
+
+:CoffeeResume
+cakeコマンドの一時停止を解除します。
+
+:CoffeeStop
+現在ファイルから実行されるcakeコマンドを停止します。
+Cakefileの1行目に
+// coffee-cake stopped.
+の行が追加されます。
+
+:CoffeePlay
+現在ファイルから実行されるcakeコマンドの停止を解除します。
+Cakefileの1行目が
+// coffee-cake stopped.
+となっていた場合、この行が取り除かれます。
+
+
+" 設定
+" 指定した拡張子のファイル保存時にgrunt実行
+" 例：jsファイルで実行する場合
+let g:coffee_cake_file = ['js']
+
+" 例：js,phpで実行する場合
+let g:coffee_cake_file = ['js', 'php']
+
+" ディレクトリを遡る最大数
+let g:coffee_cake_cdloop = 5
+
+" 発見した場合にcakeコマンドを実行
+let g:coffee_cake_makefile = 'Cakefile'
+
+" 実行するコマンド
+" エラー表示なし(バックエンド実行)
+let g:coffee_cake_cmd = 'cake&'
